@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <title>T & P BRA Bangsaen Shop | ร้านบรา & ไอเท็มเด็ดสำหรับสาวๆ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- ฟอนต์ Google สำหรับภาษาไทย -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;700&display=swap" rel="stylesheet">
   <style>
 body {
   font-family: 'Noto Sans Thai', sans-serif;
@@ -468,29 +472,32 @@ function renderProducts() {
   });
   window.galleryState = {};
   PRODUCTS.forEach(prod => {
-    galleryState[prod.id] = { idx: 0, images: prod.images };
+    window.galleryState[prod.id] = { idx: 0, images: prod.images };
     showImg(prod.id, 0);
   });
 }
 window.renderProducts = renderProducts;
 
 function showImg(id, i) {
-  galleryState[id].idx = i;
-  document.getElementById('main-' + id).src = galleryState[id].images[i];
-  document.getElementById('imgIndex-' + id).textContent = (i+1) + '/' + galleryState[id].images.length;
+  window.galleryState[id].idx = i;
+  document.getElementById('main-' + id).src = window.galleryState[id].images[i];
+  document.getElementById('imgIndex-' + id).textContent = (i+1) + '/' + window.galleryState[id].images.length;
 }
 function prevImg(id) {
-  let st = galleryState[id];
+  let st = window.galleryState[id];
   st.idx = (st.idx + st.images.length - 1) % st.images.length;
   showImg(id, st.idx);
 }
 function nextImg(id) {
-  let st = galleryState[id];
+  let st = window.galleryState[id];
   st.idx = (st.idx + 1) % st.images.length;
   showImg(id, st.idx);
 }
 
-document.addEventListener("DOMContentLoaded", renderProducts);
+document.addEventListener("DOMContentLoaded", function() {
+  renderProducts();
+  renderCart();
+});
 
 let cart = [];
 function addToCart(productId) {
@@ -550,7 +557,7 @@ document.getElementById("checkout-btn").onclick = function() {
     return;
   }
   document.getElementById("customer-form-section").style.display = "block";
-  window.scrollTo(0, document.getElementById("customer-form-section").offsetTop);
+  window.scrollTo({ top: document.getElementById("customer-form-section").offsetTop, behavior: "smooth" });
 };
 document.getElementById("customer-form").onsubmit = function(e) {
   e.preventDefault();
@@ -580,7 +587,6 @@ document.getElementById("customer-form").onsubmit = function(e) {
   window.open(sendUrl, "_blank");
   alert("ส่งออเดอร์ไปที่ LINE แล้วค่ะ");
 };
-document.addEventListener("DOMContentLoaded", renderCart);
   </script>
 </body>
 </html>
