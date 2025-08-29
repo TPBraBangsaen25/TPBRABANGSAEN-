@@ -217,6 +217,7 @@ header, footer {
   </footer>
 
   <script>
+    // Moved all script code here
 const PRODUCT_GROUPS = [
   {
     name: "บราทรงต่างๆ",
