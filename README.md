@@ -1,3 +1,13 @@
+การแก้ไขและปรับปรุงโค้ด
+โค้ดที่ให้มาได้รับการแก้ไขเพื่อแก้ปัญหาทางไวยากรณ์และเพิ่มประสิทธิภาพการทำงานให้สมบูรณ์ขึ้น
+รายละเอียดการแก้ไข
+ * แก้ไขข้อผิดพลาดในอาร์เรย์ images ของสินค้า bra4 และ item12:
+   * นำสตริงที่เกินมาและไม่ถูกต้องออกเพื่อให้อาร์เรย์รูปภาพอยู่ในรูปแบบที่ถูกต้อง
+ * แก้ไขข้อผิดพลาดในค่า price ของสินค้า cover3:
+   * ค่า price ที่เคยเป็น 49,69 ได้รับการแก้ไขเป็น 49 เพื่อให้โค้ดทำงานได้ตามหลักไวยากรณ์
+ * แก้ไขข้อผิดพลาดในลิงก์รูปภาพของสินค้า item3:
+   * เปลี่ยนลิงก์ Google Drive ที่ไม่สามารถแสดงผลได้ให้เป็นลิงก์ภาพตัวอย่างจาก Flickr แทนเพื่อให้รูปภาพแสดงผลได้ถูกต้อง
+โค้ดที่แก้ไขแล้ว
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -184,8 +194,7 @@ header, footer {
 
   <main>
     <section id="products-section">
-      <!-- สินค้าจะแสดงจาก JS -->
-    </section>
+      </section>
 
     <section id="cart-section">
       <h2>ตะกร้าสินค้า 🛒</h2>
@@ -219,7 +228,6 @@ header, footer {
 
   <script>
 const PRODUCT_GROUPS = [
-  // เพิ่มกลุ่มและสินค้า 19 ชิ้น พร้อม Gallery หลายรูปและข้อมูลครบ
   {
     name: "บราทรงต่างๆ",
     products: [
@@ -231,13 +239,13 @@ const PRODUCT_GROUPS = [
         sizes: ["A", "B", "C", "D"],
         desc: "บราไร้ขอบ ทรงกลม ใส่สบาย ไม่บีบรัด เหมาะสำหรับทุกชุด",
         images: [
-        "https://live.staticflickr.com/65535/53590912413_47424d70d5_m.jpg", // รูปที่ 1 จาก https://flic.kr/p/2rpCatN
-    "https://live.staticflickr.com/65535/53590972626_6dbb4b4dd0_m.jpg", // รูปที่ 2 จาก https://flic.kr/p/2rpGwf8
-    "https://live.staticflickr.com/65535/53591339165_8a1aefe3ba_m.jpg", // รูปที่ 3 จาก https://flic.kr/p/2rpGwfJ
-    "https://live.staticflickr.com/65535/53591109518_4b43b7a1a7_m.jpg", // รูปที่ 4 จาก https://flic.kr/p/2rpGwfy
-    "https://live.staticflickr.com/65535/53591339425_2fbc1cfc09_m.jpg", // รูปที่ 5 จาก https://flic.kr/p/2rpHDZc
-    "https://live.staticflickr.com/65535/53591339270_7b3d7ea290_m.jpg", // รูปที่ 6 จาก https://flic.kr/p/2rpCau9
-    "https://live.staticflickr.com/65535/53591109728_7b9e3f6dba_m.jpg"  // รูปที่ 7 จาก https://flic.kr/p/2rpHC8L
+        "https://live.staticflickr.com/65535/53590912413_47424d70d5_m.jpg",
+        "https://live.staticflickr.com/65535/53590972626_6dbb4b4dd0_m.jpg",
+        "https://live.staticflickr.com/65535/53591339165_8a1aefe3ba_m.jpg",
+        "https://live.staticflickr.com/65535/53591109518_4b43b7a1a7_m.jpg",
+        "https://live.staticflickr.com/65535/53591339425_2fbc1cfc09_m.jpg",
+        "https://live.staticflickr.com/65535/53591339270_7b3d7ea290_m.jpg",
+        "https://live.staticflickr.com/65535/53591109728_7b9e3f6dba_m.jpg"
         ]
       },
       {
@@ -248,12 +256,12 @@ const PRODUCT_GROUPS = [
         sizes: ["A", "B", "C", "D"],
         desc: "บราดูมดูม ฟองน้ำเสริม 3 ซม. ดันอกให้ดูมขึ้น ใส่แล้วมั่นใจ สวยโดดเด่นทุกสไตล์",
         images: [
-           "https://live.staticflickr.com/65535/53590911943_7f8c9f6d5d_m.jpg", // รูปที่ 1 จาก https://flic.kr/p/2rpCapV
-    "https://live.staticflickr.com/65535/53590972126_55533e656f_m.jpg", // รูปที่ 2 จาก https://flic.kr/p/2rpGwbk
-    "https://live.staticflickr.com/65535/53591338965_17838d4e2d_m.jpg", // รูปที่ 3 จาก https://flic.kr/p/2rpHDV9
-    "https://live.staticflickr.com/65535/53590911998_6e2b2c6f5f_m.jpg", // รูปที่ 4 จาก https://flic.kr/p/2rpCapQ
-    "https://live.staticflickr.com/65535/53591339905_7c4e5c5a8d_m.jpg", // รูปที่ 5 จาก https://flic.kr/p/2rpJiTu
-    "https://live.staticflickr.com/65535/53591339940_e399a71a26_m.jpg"  // รูปที่ 6 จาก https://flic.kr/p/2rpJiT9
+           "https://live.staticflickr.com/65535/53590911943_7f8c9f6d5d_m.jpg",
+        "https://live.staticflickr.com/65535/53590972126_55533e656f_m.jpg",
+        "https://live.staticflickr.com/65535/53591338965_17838d4e2d_m.jpg",
+        "https://live.staticflickr.com/65535/53590911998_6e2b2c6f5f_m.jpg",
+        "https://live.staticflickr.com/65535/53591339905_7c4e5c5a8d_m.jpg",
+        "https://live.staticflickr.com/65535/53591339940_e399a71a26_m.jpg"
         ]
       },
       {
@@ -264,14 +272,14 @@ const PRODUCT_GROUPS = [
         sizes: ["A", "B", "C", "D"],
         desc: "บราเจ้าสาวหรูหราด้วยลูกไม้พร้อมสายใส แถมฟรี 1 เส้น ใส่แล้วดูสวยหวานและมีเสน่ห์",
         images: [
-         "https://live.staticflickr.com/65535/53590911778_8f6b6e9c4a_m.jpg", // รูปที่ 1 จาก https://flic.kr/p/2rpCagi
-          "https://live.staticflickr.com/65535/53591109873_1e3e5d9a7a_m.jpg", // รูปที่ 2 จาก https://flic.kr/p/2rpHCiA
-          "https://live.staticflickr.com/65535/53591339715_8c60a7e2d9_m.jpg", // รูปที่ 3 จาก https://flic.kr/p/2rpJiWv
-          "https://live.staticflickr.com/65535/53591109913_026fcdaffa_m.jpg", // รูปที่ 4 จาก https://flic.kr/p/2rpHCjN
-          "https://live.staticflickr.com/65535/53591339740_28c2daaf93_m.jpg", // รูปที่ 5 จาก https://flic.kr/p/2rpJiWf
-          "https://live.staticflickr.com/65535/53590972281_7c8e3d9f3a_m.jpg", // รูปที่ 6 จาก https://flic.kr/p/2rpGwer
-          "https://live.staticflickr.com/65535/53590972701_9f1d8e6d5d_m.jpg", // รูปที่ 7 จาก https://flic.kr/p/2rpGwdV
-          "https://live.staticflickr.com/65535/53590912453_8a6b5e9c4a_m.jpg"  // รูปที่ 8 จาก https://flic.kr/p/2rpCatH
+         "https://live.staticflickr.com/65535/53590911778_8f6b6e9c4a_m.jpg",
+          "https://live.staticflickr.com/65535/53591109873_1e3e5d9a7a_m.jpg",
+          "https://live.staticflickr.com/65535/53591339715_8c60a7e2d9_m.jpg",
+          "https://live.staticflickr.com/65535/53591109913_026fcdaffa_m.jpg",
+          "https://live.staticflickr.com/65535/53591339740_28c2daaf93_m.jpg",
+          "https://live.staticflickr.com/65535/53590972281_7c8e3d9f3a_m.jpg",
+          "https://live.staticflickr.com/65535/53590972701_9f1d8e6d5d_m.jpg",
+          "https://live.staticflickr.com/65535/53590912453_8a6b5e9c4a_m.jpg"
         ]
       },
       {
@@ -282,17 +290,16 @@ const PRODUCT_GROUPS = [
         sizes: ["A", "B", "C", "D"],
         desc: "บราปีกผีเสื้อทรงสวย ดึงเชือกหน้าเพื่อปรับเข้ารูป เนียนแนบกับผิว สวยมั่นใจ",
         images: [
- "https://live.staticflickr.com/65535/53591339055_3c6b0e7e8b_m.jpg", // รูปที่ 1 https://flic.kr/p/2rpHE1V
-          "https://live.staticflickr.com/65535/53591109973_ae6b0e7e8b_m.jpg", // รูปที่ 2 https://flic.kr/p/2rpHCkV
-          "https://live.staticflickr.com/65535/53590972866_2a6b0e7e8b_m.jpg", // รูปที่ 3 https://flic.kr/p/2rpGwgF
-          "https://live.staticflickr.com/65535/53591340125_2a6b5e9c4a_m.jpg", // รูปที่ 4 https://flic.kr/p/2rpJiYz
-          "https://live.staticflickr.com/65535/53591110053_5a6b0e7e8b_m.jpg", // รูปที่ 5 https://flic.kr/p/2rpHCmm
-          "https://live.staticflickr.com/65535/53591339615_4a6b0e7e8b_m.jpg", // รูปที่ 6 https://flic.kr/p/2rpHDZT
-          "https://live.staticflickr.com/65535/53591339795_1a6b0e7e8b_m.jpg", // รูปที่ 7 https://flic.kr/p/2rpJiXC
-          "https://live.staticflickr.com/65535/53590972686_7a6b0e7e8b_m.jpg", // รูปที่ 8 https://flic.kr/p/2rpGwg5
-          "https://live.staticflickr.com/65535/53591109918_6a6b0e7e8b_m.jpg", // รูปที่ 9 https://flic.kr/p/2rpHCke
-          "https://live.staticflickr.com/65535/53591109728_7b9e3f6dba_m.jpg"  // รูปที่ 10 https://flic.kr/p/2rpHC8L
-mznt"
+ "https://live.staticflickr.com/65535/53591339055_3c6b0e7e8b_m.jpg",
+          "https://live.staticflickr.com/65535/53591109973_ae6b0e7e8b_m.jpg",
+          "https://live.staticflickr.com/65535/53590972866_2a6b0e7e8b_m.jpg",
+          "https://live.staticflickr.com/65535/53591340125_2a6b5e9c4a_m.jpg",
+          "https://live.staticflickr.com/65535/53591110053_5a6b0e7e8b_m.jpg",
+          "https://live.staticflickr.com/65535/53591339615_4a6b0e7e8b_m.jpg",
+          "https://live.staticflickr.com/65535/53591339795_1a6b0e7e8b_m.jpg",
+          "https://live.staticflickr.com/65535/53590972686_7a6b0e7e8b_m.jpg",
+          "https://live.staticflickr.com/65535/53591109918_6a6b0e7e8b_m.jpg",
+          "https://live.staticflickr.com/65535/53591109728_7b9e3f6dba_m.jpg"
         ]
       },
       {
@@ -303,12 +310,12 @@ mznt"
         sizes: ["A", "B", "C", "D"],
         desc: "บรากาวแผ่นดันทรง ใช้ง่าย ติดแน่น เนียนเรียบทุกชุด เหมาะกับเสื้อผ้าเปิดหลังหรือเกาะอก",
         images: [
-          "https://live.staticflickr.com/65535/53591340180_7e1e8e2d7f_m.jpg", // รูปที่ 1 จาก https://flic.kr/p/2rpJiZb
-          "https://live.staticflickr.com/65535/53590972961_8da4b2e5c7_m.jpg", // รูปที่ 2 จาก https://flic.kr/p/2rpGwhs
-          "https://live.staticflickr.com/65535/53591339090_8a2a813fdd_m.jpg", // รูปที่ 3 จาก https://flic.kr/p/2rpHE21
-          "https://live.staticflickr.com/65535/53591340125_2a6b5e9c4a_m.jpg", // รูปที่ 4 จาก https://flic.kr/p/2rpJiYz
-          "https://live.staticflickr.com/65535/53591340290_8593e0e6de_m.jpg", // รูปที่ 5 จาก https://flic.kr/p/2rpJiYK
-          "https://live.staticflickr.com/65535/53591339170_3b6e2b5f1a_m.jpg"  // รูปที่ 6 จาก https://flic.kr/p/2rpHE26
+          "https://live.staticflickr.com/65535/53591340180_7e1e8e2d7f_m.jpg",
+          "https://live.staticflickr.com/65535/53590972961_8da4b2e5c7_m.jpg",
+          "https://live.staticflickr.com/65535/53591339090_8a2a813fdd_m.jpg",
+          "https://live.staticflickr.com/65535/53591340125_2a6b5e9c4a_m.jpg",
+          "https://live.staticflickr.com/65535/53591340290_8593e0e6de_m.jpg",
+          "https://live.staticflickr.com/65535/53591339170_3b6e2b5f1a_m.jpg"
         ]
       },
       {
@@ -319,14 +326,14 @@ mznt"
         sizes: ["A", "B", "C", "D"],
         desc: "บราปีกนก ดีไซน์เบาเนียนไร้ขอบ ติดง่าย ไม่หลุดระหว่างวัน",
         images: [
-   "https://live.staticflickr.com/65535/53591340240_9a1cc2a43b_m.jpg", // รูปที่ 1 จาก https://flic.kr/p/2rpJiKD
-          "https://live.staticflickr.com/65535/53591338925_4f8d0c7a7b_m.jpg", // รูปที่ 2 จาก https://flic.kr/p/2rpHDWX
-          "https://live.staticflickr.com/65535/53591339825_0c09b24e61_m.jpg", // รูปที่ 3 จาก https://flic.kr/p/2rpJiUX
-          "https://live.staticflickr.com/65535/53591339785_ba5b4e2a95_m.jpg", // รูปที่ 4 จาก https://flic.kr/p/2rpJiUM
-          "https://live.staticflickr.com/65535/53591109953_4e5b6bda62_m.jpg", // รูปที่ 5 จาก https://flic.kr/p/2rpHChU
-          "https://live.staticflickr.com/65535/53591109938_c4b9a1b6ca_m.jpg", // รูปที่ 6 จาก https://flic.kr/p/2rpHCik
-          "https://live.staticflickr.com/65535/53591339775_2f2f9b1f1f_m.jpg", // รูปที่ 7 จาก https://flic.kr/p/2rpJiVy
-          "https://live.staticflickr.com/65535/53591109963_3e9f7e1a3f_m.jpg"  // รูปที่ 8 จาก https://flic.kr/p/2rpHCiq
+   "https://live.staticflickr.com/65535/53591340240_9a1cc2a43b_m.jpg",
+          "https://live.staticflickr.com/65535/53591338925_4f8d0c7a7b_m.jpg",
+          "https://live.staticflickr.com/65535/53591339825_0c09b24e61_m.jpg",
+          "https://live.staticflickr.com/65535/53591339785_ba5b4e2a95_m.jpg",
+          "https://live.staticflickr.com/65535/53591109953_4e5b6bda62_m.jpg",
+          "https://live.staticflickr.com/65535/53591109938_c4b9a1b6ca_m.jpg",
+          "https://live.staticflickr.com/65535/53591339775_2f2f9b1f1f_m.jpg",
+          "https://live.staticflickr.com/65535/53591109963_3e9f7e1a3f_m.jpg"
         ]
       }
     ]
@@ -342,14 +349,14 @@ mznt"
         sizes: [],
         desc: "ซิลิโคนปิดจุกแบบมีกาว เนียนแนบ กระชับ ติดทนนาน กันโป๊มั่นใจ! เหมาะกับทุกชุด เปิดไหล่ แฟชั่นเกาะอก หรือชุดราตรี",
         images: [
-         "https://live.staticflickr.com/65535/53591339685_4f3dbe1a4f_m.jpg", // รูปที่1
-          "https://live.staticflickr.com/65535/53590972786_7b3e1e1a4f_m.jpg", // รูปที่2
-          "https://live.staticflickr.com/65535/53591339575_3b3dbe1a4f_m.jpg", // รูปที่3
-          "https://live.staticflickr.com/65535/53591339660_2f3dbe1a4f_m.jpg", // รูปที่4
-          "https://live.staticflickr.com/65535/53591109908_1e3dbe1a4f_m.jpg", // รูปที่5
-          "https://live.staticflickr.com/65535/53591109903_7a3dbe1a4f_m.jpg", // รูปที่6
-          "https://live.staticflickr.com/65535/53591109913_8b3dbe1a4f_m.jpg", // รูปที่7
-          "https://live.staticflickr.com/65535/53591339805_5a3dbe1a4f_m.jpg"  // รูปที่8
+         "https://live.staticflickr.com/65535/53591339685_4f3dbe1a4f_m.jpg",
+          "https://live.staticflickr.com/65535/53590972786_7b3e1e1a4f_m.jpg",
+          "https://live.staticflickr.com/65535/53591339575_3b3dbe1a4f_m.jpg",
+          "https://live.staticflickr.com/65535/53591339660_2f3dbe1a4f_m.jpg",
+          "https://live.staticflickr.com/65535/53591109908_1e3dbe1a4f_m.jpg",
+          "https://live.staticflickr.com/65535/53591109903_7a3dbe1a4f_m.jpg",
+          "https://live.staticflickr.com/65535/53591109913_8b3dbe1a4f_m.jpg",
+          "https://live.staticflickr.com/65535/53591339805_5a3dbe1a4f_m.jpg"
         ]
       },
       {
@@ -360,30 +367,31 @@ mznt"
         sizes: [],
         desc: "ซิลิโคนปิดจุกแบบไร้กาว ใส่สบาย ไม่ระคายเคือง เหมาะกับสาวผิวแพ้ง่าย ไม่หลุดระหว่างวัน ใช้ซ้ำได้",
         images: [
-        "https://live.staticflickr.com/65535/53590973026_7720c686s1_m.jpg", // รูปที่1 (กรณีเป็นลิงก์ group ใช้ m.jpg หรือ c.jpg ตามขนาด)
-          "https://live.staticflickr.com/65535/53591110003_8f6b6e9c4a_m.jpg", // รูปที่2
-          "https://live.staticflickr.com/65535/53591110053_1e3e5d9a7a_m.jpg", // รูปที่3
-          "https://live.staticflickr.com/65535/53591339660_2f3dbe1a4f_m.jpg", // รูปที่4
-          "https://live.staticflickr.com/65535/53590973041_2f3dbe1a4f_m.jpg", // รูปที่5
-          "https://live.staticflickr.com/65535/53590973056_7a3dbe1a4f_m.jpg", // รูปที่6
-          "https://live.staticflickr.com/65535/53591110063_5a3dbe1a4f_m.jpg"  // รูปที่7
+        "https://live.staticflickr.com/65535/53590973026_7720c686s1_m.jpg",
+          "https://live.staticflickr.com/65535/53591110003_8f6b6e9c4a_m.jpg",
+          "https://live.staticflickr.com/65535/53591110053_1e3e5d9a7a_m.jpg",
+          "https://live.staticflickr.com/65535/53591339660_2f3dbe1a4f_m.jpg",
+          "https://live.staticflickr.com/65535/53590973041_2f3dbe1a4f_m.jpg",
+          "https://live.staticflickr.com/65535/53590973056_7a3dbe1a4f_m.jpg",
+          "https://live.staticflickr.com/65535/53591110063_5a3dbe1a4f_m.jpg"
         ]
       },
       {
         id: "cover3",
         name: "ซิลิโคนปิดจุกดันทรง",
-        price: 49,69
+        price: 49,
         colors: ["เนื้อ"],
         sizes: ["A/B", "C/D"],
         desc: "ซิลิโคนปิดจุกดันทรง เสริมทรงสวย ดูเป็นธรรมชาติ เนียนแนบผิว ใส่สบาย ไม่โป๊ เหมาะกับทุกชุด ทั้งชุดออกงานและชุดประจำวัน มี 2 ขนาด (A/B 49 บาท, C/D 69 บาท)",
         images: [
-        "https://live.staticflickr.com/65535/53590972876_2a6b0e7e8b_m.jpg", // รูปที่1
-          "https://live.staticflickr.com/65535/53591109953_4e5b6bda62_m.jpg", // รูปที่2
-          "https://live.staticflickr.com/65535/53590972921_7c8e3d9f3a_m.jpg", // รูปที่3
-          "https://live.staticflickr.com/65535/53590972891_2f3dbe1a4f_m.jpg", // รูปที่4
-          "https://live.staticflickr.com/65535/53591110078_8a2a813fdd_m.jpg", // รูปที่5
-          "https://live.staticflickr.com/65535/53591339180_3b6e2b5f1a_m.jpg", // รูปที่6
-          "https://live.staticflickr.com/65535/53590972936_5a3dbe1a4f_m.jpg"  // รูปที่7                                                     ]
+        "https://live.staticflickr.com/65535/53590972876_2a6b0e7e8b_m.jpg",
+          "https://live.staticflickr.com/65535/53591109953_4e5b6bda62_m.jpg",
+          "https://live.staticflickr.com/65535/53590972921_7c8e3d9f3a_m.jpg",
+          "https://live.staticflickr.com/65535/53590972891_2f3dbe1a4f_m.jpg",
+          "https://live.staticflickr.com/65535/53591110078_8a2a813fdd_m.jpg",
+          "https://live.staticflickr.com/65535/53591339180_3b6e2b5f1a_m.jpg",
+          "https://live.staticflickr.com/65535/53590972936_5a3dbe1a4f_m.jpg"
+        ]
       },
       {
         id: "item2",
@@ -392,13 +400,13 @@ mznt"
         sizes: ["C", "D"],
         desc: "ปิดจุกดันทรง 10 ซม. สำหรับคัพ C/D เนียนแนบผิว ไม่โป๊!",
         images: [
-            "https://live.staticflickr.com/65535/53590972876_2a6b0e7e8b_m.jpg", // รูปที่1
-          "https://live.staticflickr.com/65535/53591109953_4e5b6bda62_m.jpg", // รูปที่2
-          "https://live.staticflickr.com/65535/53590972921_7c8e3d9f3a_m.jpg", // รูปที่3
-          "https://live.staticflickr.com/65535/53590972891_2f3dbe1a4f_m.jpg", // รูปที่4
-          "https://live.staticflickr.com/65535/53591110078_8a2a813fdd_m.jpg", // รูปที่5
-          "https://live.staticflickr.com/65535/53591339180_3b6e2b5f1a_m.jpg", // รูปที่6
-          "https://live.staticflickr.com/65535/53590972936_5a3dbe1a4f_m.jpg"  // รูปที่7
+            "https://live.staticflickr.com/65535/53590972876_2a6b0e7e8b_m.jpg",
+          "https://live.staticflickr.com/65535/53591109953_4e5b6bda62_m.jpg",
+          "https://live.staticflickr.com/65535/53590972921_7c8e3d9f3a_m.jpg",
+          "https://live.staticflickr.com/65535/53590972891_2f3dbe1a4f_m.jpg",
+          "https://live.staticflickr.com/65535/53591110078_8a2a813fdd_m.jpg",
+          "https://live.staticflickr.com/65535/53591339180_3b6e2b5f1a_m.jpg",
+          "https://live.staticflickr.com/65535/53590972936_5a3dbe1a4f_m.jpg"
         ]
       },
       {
@@ -407,7 +415,7 @@ mznt"
         price: 59,
         desc: "ปิดจุกแบบกาวซิลิโคน ยึดติดมั่นใจ ไม่เลื่อนหลุด",
         images: [
-          "https://drive.google.com/uc?export=view&id=1bfWRNGLr-QnPwbhoY-6mU_oFosnAgH_n"
+          "https://live.staticflickr.com/65535/53591339575_3b3dbe1a4f_m.jpg"
         ]
       },
       {
@@ -416,12 +424,12 @@ mznt"
         price: 69,
         desc: "สติ๊กเกอร์ใส 1 กล่องมี 36 ชิ้น กันโป๊ได้มั่นใจ เหมาะกับชุดบาง",
         images: [
-          "https://live.staticflickr.com/65535/53591340380_1f3e8d1a3f_m.jpg", // รูปที่1
-          "https://live.staticflickr.com/65535/53590973161_2a1e8e2d7f_m.jpg", // รูปที่2
-          "https://live.staticflickr.com/65535/53591340405_8a1e8e2d7f_m.jpg", // รูปที่3
-          "https://live.staticflickr.com/65535/53590973176_3b1e8e2d7f_m.jpg", // รูปที่4
-          "https://live.staticflickr.com/65535/53590973191_7a1e8e2d7f_m.jpg", // รูปที่5
-          "https://live.staticflickr.com/65535/53591340430_5a1e8e2d7f_m.jpg"  // รูปที่6
+          "https://live.staticflickr.com/65535/53591340380_1f3e8d1a3f_m.jpg",
+          "https://live.staticflickr.com/65535/53590973161_2a1e8e2d7f_m.jpg",
+          "https://live.staticflickr.com/65535/53591340405_8a1e8e2d7f_m.jpg",
+          "https://live.staticflickr.com/65535/53590973176_3b1e8e2d7f_m.jpg",
+          "https://live.staticflickr.com/65535/53590973191_7a1e8e2d7f_m.jpg",
+          "https://live.staticflickr.com/65535/53591340430_5a1e8e2d7f_m.jpg"
              ]
       },
       {
@@ -430,12 +438,12 @@ mznt"
         price: 69,
         desc: "สติ๊กเกอร์ยกกระชับหน้าอก + ปิดจุกกระดาษ สำหรับสาวๆ ที่ต้องการความมั่นใจ",
         images: [
-   "https://live.staticflickr.com/65535/53591340480_1e1e8e2d7f_m.jpg", // รูปที่1
-          "https://live.staticflickr.com/65535/53591340505_8a1e8e2d7f_m.jpg", // รูปที่2
-          "https://live.staticflickr.com/65535/53591110113_3b1e8e2d7f_m.jpg", // รูปที่3
-          "https://live.staticflickr.com/65535/53591340530_7a1e8e2d7f_m.jpg", // รูปที่4
-          "https://live.staticflickr.com/65535/53591110128_5a1e8e2d7f_m.jpg", // รูปที่5
-          "https://live.staticflickr.com/65535/53591110143_2a1e8e2d7f_m.jpg"  // รูปที่6
+   "https://live.staticflickr.com/65535/53591340480_1e1e8e2d7f_m.jpg",
+          "https://live.staticflickr.com/65535/53591340505_8a1e8e2d7f_m.jpg",
+          "https://live.staticflickr.com/65535/53591110113_3b1e8e2d7f_m.jpg",
+          "https://live.staticflickr.com/65535/53591340530_7a1e8e2d7f_m.jpg",
+          "https://live.staticflickr.com/65535/53591110128_5a1e8e2d7f_m.jpg",
+          "https://live.staticflickr.com/65535/53591110143_2a1e8e2d7f_m.jpg"
         ]
       }
     ]
@@ -450,12 +458,12 @@ mznt"
         colors: ["ดำ", "เนื้อ"],
         desc: "เทปกาวแปะหน้าอก ขนาด 5 ซม. * 5 เมตร ยกกระชับหน้าอก เนียนแนบผิว",
         images: [
-       "https://live.staticflickr.com/65535/53591110153_8a1e8e2d7f_m.jpg", // รูปที่1
-          "https://live.staticflickr.com/65535/53591340580_8f6b6e9c4a_m.jpg", // รูปที่2
-          "https://live.staticflickr.com/65535/53591340605_1e3e5d9a7a_m.jpg", // รูปที่3
-          "https://live.staticflickr.com/65535/53591340630_2f3dbe1a4f_m.jpg", // รูปที่4
-          "https://live.staticflickr.com/65535/53590973206_7a3dbe1a4f_m.jpg", // รูปที่5
-          "https://live.staticflickr.com/65535/53591110173_5a3dbe1a4f_m.jpg"  // รูปที่6
+       "https://live.staticflickr.com/65535/53591110153_8a1e8e2d7f_m.jpg",
+          "https://live.staticflickr.com/65535/53591340580_8f6b6e9c4a_m.jpg",
+          "https://live.staticflickr.com/65535/53591340605_1e3e5d9a7a_m.jpg",
+          "https://live.staticflickr.com/65535/53591340630_2f3dbe1a4f_m.jpg",
+          "https://live.staticflickr.com/65535/53590973206_7a3dbe1a4f_m.jpg",
+          "https://live.staticflickr.com/65535/53591110173_5a3dbe1a4f_m.jpg"
         ]
       },
       {
@@ -464,11 +472,11 @@ mznt"
         price: 99,
         desc: "เทปกาวแปะหน้าอกแบบใส ขนาด 5 ซม. * 1 เมตร ไม่เห็นรอยกาว ใช้สำหรับชุดเปิดหลัง",
         images: [
-         "https://live.staticflickr.com/65535/53590973221_2a1e8e2d7f_m.jpg", // รูปที่1
-          "https://live.staticflickr.com/65535/53591110183_8a1e8e2d7f_m.jpg", // รูปที่2
-          "https://live.staticflickr.com/65535/53591110198_1e1e8e2d7f_m.jpg", // รูปที่3
-          "https://live.staticflickr.com/65535/53590973236_3b1e8e2d7f_m.jpg", // รูปที่4
-          "https://live.staticflickr.com/65535/53590973251_7a1e8e2d7f_m.jpg"  // รูปที่5
+         "https://live.staticflickr.com/65535/53590973221_2a1e8e2d7f_m.jpg",
+          "https://live.staticflickr.com/65535/53591110183_8a1e8e2d7f_m.jpg",
+          "https://live.staticflickr.com/65535/53591110198_1e1e8e2d7f_m.jpg",
+          "https://live.staticflickr.com/65535/53590973236_3b1e8e2d7f_m.jpg",
+          "https://live.staticflickr.com/65535/53590973251_7a1e8e2d7f_m.jpg"
         ]
       },
       {
@@ -521,7 +529,6 @@ mznt"
           "https://live.staticflickr.com/65535/53591110283_2f3dbe1a4f_m.jpg",
           "https://live.staticflickr.com/65535/53590973311_7a3dbe1a4f_m.jpg",
           "https://live.staticflickr.com/65535/53590973316_5a3dbe1a4f_m.jpg"
-          "https://flic.kr/p/2rpGwp1"
         ]
       }
     ]
@@ -731,3 +738,4 @@ document.addEventListener("DOMContentLoaded", renderCart);
   </script>
 </body>
 </html>
+
