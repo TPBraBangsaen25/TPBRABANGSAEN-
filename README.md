@@ -143,7 +143,7 @@ header, footer {
   box-shadow: 0 2px 6px #e3e3e3;
   transition: border .2s;
 }
-.thumb:hover {
+.thumb.active {
   border-color: #d1005d;
 }
 @media (max-width: 900px) {
@@ -466,7 +466,7 @@ const PRODUCT_GROUPS = [
           "https://live.staticflickr.com/65535/53591110183_8a1e8e2d7f_m.jpg",
           "https://live.staticflickr.com/65535/53591110198_1e1e8e2d7f_m.jpg",
           "https://live.staticflickr.com/65535/53590973236_3b1e8e2d7f_m.jpg",
-          "https://live.staticflickr.com/65535/53590973251_7a1e8e2d7f_m.jpg"
+          "https://live.staticflickr.com/65535/53590973251_7a3dbe1a4f_m.jpg"
         ]
       },
       {
@@ -565,6 +565,17 @@ const PRODUCT_GROUPS = [
   }
 ];
 
+function findProduct(id) {
+  for (const group of PRODUCT_GROUPS) {
+    for (const prod of group.products) {
+      if (prod.id === id) {
+        return prod;
+      }
+    }
+  }
+  return null;
+}
+
 function renderProducts() {
   const section = document.getElementById('products-section');
   section.innerHTML = "";
@@ -580,7 +591,7 @@ function renderProducts() {
             <span id="imgIndex-${prod.id}">1/${prod.images.length}</span>
             <button onclick="nextImg('${prod.id}')">▶️</button>
           </div>
-          <div class="thumbnails">
+          <div class="thumbnails" id="thumbs-${prod.id}">
             ${prod.images.map((img, i) => `<img src="${img}" class="thumb" onclick="showImg('${prod.id}',${i})">`).join('')}
           </div>
         </div>
@@ -615,17 +626,36 @@ function renderProducts() {
 window.renderProducts = renderProducts;
 
 function showImg(id, i) {
-  galleryState[id].idx = i;
-  document.getElementById('main-' + id).src = galleryState[id].images[i];
-  document.getElementById('imgIndex-' + id).textContent = (i+1) + '/' + galleryState[id].images.length;
+  const prod = findProduct(id);
+  if (!prod) return;
+  const mainImg = document.getElementById('main-' + id);
+  const imgIndexSpan = document.getElementById('imgIndex-' + id);
+  const thumbs = document.querySelectorAll(`#thumbs-${id} .thumb`);
+
+  if (mainImg) {
+    mainImg.src = prod.images[i];
+  }
+  if (imgIndexSpan) {
+    imgIndexSpan.textContent = (i + 1) + '/' + prod.images.length;
+  }
+  if (thumbs.length) {
+    thumbs.forEach(thumb => thumb.classList.remove('active'));
+    thumbs[i].classList.add('active');
+  }
+  window.galleryState[id].idx = i;
 }
+
 function prevImg(id) {
-  let st = galleryState[id];
-  st.idx = (st.idx + st.images.length - 1) % st.images.length;
+  const prod = findProduct(id);
+  if (!prod) return;
+  let st = window.galleryState[id];
+  st.idx = (st.idx - 1 + st.images.length) % st.images.length;
   showImg(id, st.idx);
 }
 function nextImg(id) {
-  let st = galleryState[id];
+  const prod = findProduct(id);
+  if (!prod) return;
+  let st = window.galleryState[id];
   st.idx = (st.idx + 1) % st.images.length;
   showImg(id, st.idx);
 }
@@ -634,8 +664,7 @@ document.addEventListener("DOMContentLoaded", renderProducts);
 
 let cart = [];
 function addToCart(productId) {
-  const group = PRODUCT_GROUPS.find(g => g.products.some(p => p.id === productId));
-  const prod = group.products.find(p => p.id === productId);
+  const prod = findProduct(productId);
   if (!prod) return;
   const color = prod.colors && prod.colors.length ? document.getElementById("color-"+productId).value : "";
   const size = prod.sizes && prod.sizes.length ? document.getElementById("size-"+productId).value : "";
@@ -656,13 +685,13 @@ function renderCart() {
   cartList.innerHTML = "";
   let total = 0;
   cart.forEach((item, idx) => {
-    const group = PRODUCT_GROUPS.find(g => g.products.some(p => p.id === item.productId));
-    const prod = group.products.find(p => p.id === item.productId);
+    const prod = findProduct(item.productId);
     if (!prod) return;
     total += prod.price * item.qty;
+    const prodImg = prod.images[0];
     cartList.innerHTML += `
       <div class="cart-item">
-        <img src="${prod.images[galleryState[item.productId] ? galleryState[item.productId].idx : 0]}" alt="${prod.name}" width="50">
+        <img src="${prodImg}" alt="${prod.name}" width="50">
         <span>${prod.name}${item.color ? " ("+item.color+")" : ""}${item.size ? " / "+item.size : ""} x ${item.qty}</span>
         <span>${prod.price * item.qty} บาท</span>
         <button onclick="changeQty(${idx}, -1)">-</button>
@@ -707,14 +736,12 @@ document.getElementById("customer-form").onsubmit = function(e) {
   msg += `ชื่อ: ${customer.name}\nที่อยู่: ${customer.address}\nเบอร์: ${customer.phone}\nรหัสไปรษณีย์: ${customer.zipcode}\n\n`;
   msg += `รายการสินค้า:\n`;
   cart.forEach(item => {
-    const group = PRODUCT_GROUPS.find(g => g.products.some(p => p.id === item.productId));
-    const prod = group.products.find(p => p.id === item.productId);
+    const prod = findProduct(item.productId);
     if (prod)
       msg += `${prod.name}${item.color ? " ("+item.color+")" : ""}${item.size ? " / "+item.size : ""} x ${item.qty} = ${prod.price * item.qty} บาท\n`;
   });
   let total = cart.reduce((sum, item) => {
-    const group = PRODUCT_GROUPS.find(g => g.products.some(p => p.id === item.productId));
-    const prod = group.products.find(p => p.id === item.productId);
+    const prod = findProduct(item.productId);
     return sum + (prod ? prod.price * item.qty : 0);
   }, 0);
   let shipping = total >= 100 ? 0 : 15;
@@ -728,4 +755,3 @@ document.addEventListener("DOMContentLoaded", renderCart);
   </script>
 </body>
 </html>
-
